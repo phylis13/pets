@@ -1,0 +1,146 @@
+import React, { useState, useEffect } from 'react';
+
+function Pets() {
+  const [petsData, setPetsData] = useState([]);
+  const [petName, setPetName] = useState('');
+  const [petDescription, setPetDescription] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+  const [petSpecies, setPetSpecies] = useState('');
+  const [petContact, setPetContact] = useState('');
+  const [petPhoto, setPetPhoto] = useState('');
+  const [addSuccess, setAddSuccess] = useState(false);
+  const [addFailed, setAddFailed] = useState(false);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      const response = await fetch('https://pets-final.onrender.com/pets');
+      const data = await response.json();
+      setPetsData(data.data);
+    };
+
+    fetchPets();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const petData = {
+      name: petName,
+      description: petDescription,
+      breeds: petBreed,
+      species: petSpecies,
+      contact: petContact,
+      photos: petPhoto,
+    };
+    const response = await fetch('https://pets-final.onrender.com/pets/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(petData),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      setPetsData([...petsData, data.data]);
+      setPetName('');
+      setPetDescription('');
+      setPetBreed('');
+      setPetSpecies('');
+      setPetContact('');
+      setPetPhoto('');
+      setAddSuccess(true);
+      setAddFailed(false);
+    } else {
+      setAddFailed(true);
+      setAddSuccess(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`https://pets-final.onrender.com/pets/destroy/${id}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      const newData = petsData.filter((pet) => pet.id !== id);
+      setPetsData(newData);
+    }
+  };
+
+  return (
+    <div>
+      <h2>Add a new pet:</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Name:
+          <input
+            type="text"
+            value={petName}
+            onChange={(e) => setPetName(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Description:
+          <textarea
+            value={petDescription}
+            onChange={(e) => setPetDescription(e.target.value)}
+          ></textarea>
+        </label>
+        <br />
+        <label>
+          Breed:
+          <input
+            type="text"
+            value={petBreed}
+            onChange={(e) => setPetBreed(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Species:
+          <input
+            type="text"
+            value={petSpecies}
+            onChange={(e) => setPetSpecies(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Contact:
+          <input
+            type="text"
+            value={petContact}
+            onChange={(e) => setPetContact(e.target.value
+              )}
+              />
+              </label>
+              <br />
+              <label>
+              Photo URL:
+              <input
+              type="text"
+              value={petPhoto}
+              onChange={(e) => setPetPhoto(e.target.value)}
+              />
+              </label>
+              <br />
+              <button type="submit">Add Pet</button>
+              </form>
+              {addSuccess && <p>Pet added successfully!</p>}
+              {addFailed && <p>Failed to add pet. Please try again.</p>}
+              <h2>List of pets:</h2>
+              {petsData.map((pet) => (
+              <div key={pet.id}>
+              <h3>{pet.name}</h3>
+              <p>{pet.description}</p>
+              <p>Breed: {pet.breeds}</p>
+              <p>Species: {pet.species}</p>
+              <p>Contact: {pet.contact}</p>
+              <img src={pet.photos} alt={pet.name} />
+              <button onClick={() => handleDelete(pet.id)}>Delete</button>
+              </div>
+              ))}
+              </div>
+              );
+              }
+
+export default Pets;
