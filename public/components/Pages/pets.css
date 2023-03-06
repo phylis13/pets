@@ -1,0 +1,146 @@
+body {
+    color: #fff;
+    background: #000;
+  }
+  
+  * {
+    font-family: "Roboto", sans-serif;
+  }
+  
+  .navbar {
+    width: 80%;
+    height: 50px;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+  }
+  
+  .logo-container .logo {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 5px;
+    font-weight: bold;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+  }
+  
+  .logo-container .logo:hover {
+    border: 1px solid #fff;
+  }
+  
+  .items-container .items {
+    display: flex;
+  }
+  
+  .items .item {
+    list-style: none;
+  }
+  
+  .item-link {
+    text-decoration: none;
+    color: #fff;
+    margin-right: 10px;
+    padding: 10px 30px;
+    background-color: #000;
+    border-radius: 20px;
+    transition-duration: 0.5s;
+  }
+  
+  .item-link:hover,
+  .active {
+    color: #000;
+    background: #fff;
+  }
+  
+  .container{
+      width: 70%;
+      margin: 5rem auto;
+      display: flex;
+  }
+  
+  .ilustration{
+      width:100%;
+  }
+  
+  .info{
+      width: 60%;
+      margin-top: 6rem;
+  }
+  
+  .info .subtitle{
+      font-size: 16px;
+      font-weight: bold;
+      display: block;
+  }
+  
+  .info h1{
+      font-size: 3.5em;
+      margin:10px 0
+  }
+  
+  .btn{
+      color:#000;
+      background: #fff;
+      padding: 10px 40px;
+      border-radius: 20px;
+      font-size: 20px;
+      margin-top: 20px;
+      border: 1px solid transparent;
+      font-weight: bold;
+      transition-duration: .5s;
+  }
+  
+  .btn:hover{
+      cursor: pointer;
+      background-color: #000;
+      border:1px solid #fff;
+      color:#fff
+  }
+  
+  @media screen and (max-width:1000px){
+      .container{
+          display: block;
+          text-align: center;
+      }
+      .info{
+          width:100%;
+      }
+      .navbar{
+          display: block;
+          height:auto;
+          text-align: center;
+          padding:20px 10px
+      }
+      .items{
+          text-align: center;
+          height:auto;
+          justify-content: center;
+      }
+  }
+  
+  @media screen and (max-width: 600px){
+      .container{
+          margin-top: 0;
+      }
+      .info{
+          margin-top: 1rem;
+      }
+      .items{
+          flex-direction: column;
+          padding:0;
+      }
+  
+      .items .item {
+          overflow: hidden;
+          margin: 10px;
+      }
+      .item-link:hover, .active{
+          display: inline-block;
+          margin: 0;
+      }
+  }
