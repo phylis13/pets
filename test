@@ -1,0 +1,155 @@
+import React, { useState, useEffect } from 'react';
+
+function Pets() {
+  const [petsData, setPetsData] = useState([]);
+  const [petName, setPetName] = useState('');
+  const [petDescription, setPetDescription] = useState('');
+  const [petBreed, setPetBreed] = useState('');
+  const [petSpecies, setPetSpecies] = useState('');
+  const [petContact, setPetContact] = useState('');
+  const [petPhoto, setPetPhoto] = useState('');
+  const [addSuccess, setAddSuccess] = useState(false);
+  const [addFailed, setAddFailed] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editingPet, setEditingPet] = useState(null);
+
+  useEffect(() => {
+    const fetchPets = async () => {
+      const response = await fetch('https://pets-final.onrender.com/pets');
+      const data = await response.json();
+      setPetsData(data.data);
+    };
+
+    fetchPets();
+  }, []);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const petData = {
+      name: petName,
+      description: petDescription,
+      breeds: petBreed,
+      species: petSpecies,
+      contact: petContact,
+      photos: petPhoto,
+    };
+    const url = editing
+      ? `https://pets-final.onrender.com/pets/update/${editingPet.id}`
+      : 'https://pets-final.onrender.com/pets/create';
+    const method = editing ? 'PUT' : 'POST';
+    const response = await fetch(url, {
+      method,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(petData),
+    });
+    const data = await response.json();
+    if (response.ok) {
+      if (editing) {
+        const newData = petsData.map((pet) =>
+          pet.id === data.data.id ? data.data : pet
+        );
+        setPetsData(newData);
+      } else {
+        setPetsData([...petsData, data.data]);
+      }
+      setPetName('');
+      setPetDescription('');
+      setPetBreed('');
+      setPetSpecies('');
+      setPetContact('');
+      setPetPhoto('');
+      setAddSuccess(true);
+      setAddFailed(false);
+      setEditing(false);
+      setEditingPet(null);
+    } else {
+      setAddFailed(true);
+      setAddSuccess(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`https://pets-final.onrender.com/pets/destroy/${id}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      const newData = petsData.filter((pet) => pet.id !== id);
+      setPetsData(newData);
+    };
+
+    const handleEdit = (pet) => {
+    setPetName(pet.name);
+    setPetDescription(pet.description);
+    setPetBreed(pet.breeds);
+    setPetSpecies(pet.species);
+    setPetContact(pet.contact);
+    setPetPhoto(pet.photos);
+    setEditing(true);
+    setEditingPet(pet);
+    };
+    
+    return (
+    <div>
+    <h1>Pets List</h1>
+    <form onSubmit={handleSubmit}>
+    <input
+    type='text'
+    placeholder='Pet name'
+    value={petName}
+    onChange={(e) => setPetName(e.target.value)}
+    />
+    <input
+    type='text'
+    placeholder='Pet description'
+    value={petDescription}
+    onChange={(e) => setPetDescription(e.target.value)}
+    />
+    <input
+    type='text'
+    placeholder='Pet breed'
+    value={petBreed}
+    onChange={(e) => setPetBreed(e.target.value)}
+    />
+    <input
+    type='text'
+    placeholder='Pet species'
+    value={petSpecies}
+    onChange={(e) => setPetSpecies(e.target.value)}
+    />
+    <input
+    type='text'
+    placeholder='Pet contact'
+    value={petContact}
+    onChange={(e) => setPetContact(e.target.value)}
+    />
+    <input
+    type='text'
+    placeholder='Pet photo'
+    value={petPhoto}
+    onChange={(e) => setPetPhoto(e.target.value)}
+    />
+    <button type='submit'>{editing ? 'Update' : 'Add'}</button>
+    </form>
+    {addSuccess && <p>Pet added successfully!</p>}
+    {addFailed && <p>Failed to add pet. Please try again.</p>}
+    <ul>
+    {petsData.map((pet) => (
+    <li key={pet.id}>
+    <h2>{pet.name}</h2>
+    <p>{pet.description}</p>
+    <p>{pet.breeds}</p>
+    <p>{pet.species}</p>
+    <p>{pet.contact}</p>
+    <img src={pet.photos} alt={pet.name} />
+    <button onClick={() => handleEdit(pet)}>Edit</button>
+    <button onClick={() => handleDelete(pet.id)}>Delete</button>
+    </li>
+    ))}
+    </ul>
+    </div>
+    );
+    }
+  }
+export default Pets;
