@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+ # Pet Finder
+ is an application that allows pet owners to share information about their pets with other users, as well as search for pets that are available for adoption. This application provides a platform for pet owners to connect with potential adopters, and for those looking for pets to find their new furry friend.
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To get started with Pet Finder, follow the steps below:
 
-## Available Scripts
+    Clone the repository onto your local machine
+    Install the required dependencies using npm install
+    Start the application using npm start
+    Navigate to http://localhost:3000 in your browser to use the application
 
-In the project directory, you can run:
+# Usage
 
-### `npm start`
+In order to use Pet Finder, users must first register and login to the application. Once logged in, users can perform the following actions:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    Add a new pet to the system
+    View all the pets they have added
+    View all available pets
+    Search for a pet by name or breed
+    Update details of pets they added
+    Remove details of pets they added
+    Users are not able to update or delete pets that they have not added to the system.
+## Technologies Used
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The following technologies were used in the development of Pet Finder:
 
-### `npm test`
+- React
+ -sinatra
+    
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Contributing
 
-### `npm run build`
+If you would like to contribute to the development of Pet Finder, please follow the steps below:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    Fork the repository onto your own GitHub account
+    Create a new branch for your feature/bugfix using git checkout -b feature/your-feature
+    Commit your changes using git commit -am 'Added new feature'
+    Push your changes to your fork using git push origin feature/your-feature
+    Create a new Pull Request on the original repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# License
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the MIT License - see the LICENSE file for details.
+## Author
+phylis njeri
